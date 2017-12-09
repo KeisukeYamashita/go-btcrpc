@@ -1,4 +1,3 @@
-
 package btcrpc
 
 import (
@@ -21,21 +20,22 @@ func WithBtcRPC(f func(rpc *BtcRPC)) func() {
 	}
 }
 
+
 func TestGetBalance(t *testing.T) {
 	Convey("WithBtcRPC", t, WithBtcRPC(func(rpc *BtcRPC) {
 		Convey("Success", func() {
-			balance, err := rpc.GetBalance("0x8FfCf7674ED27c7949Ceda9a0bD6799fe74aCf47")
+			balance, err := rpc.GetBalance("user","JgMchk9GTtGPqVYdTG2bpHMJ", "1JxEFrgYHF51HY2qsE6erYEAdMxTG4iXu4")
 			So(err, ShouldBeNil)
-			So(balance, ShouldBeGreaterThan, 0)
+			So(balance, ShouldEqual, "0x56bc75e2d63100000") // 100 ETH
 		})
 
 		Convey("Empty Address", func() {
-			_, err := rpc.GetBalance("")
+			_, err := rpc.GetBalance("user","JgMchk9GTtGPqVYdTG2bpHMJ", "")
 			So(err.Error(), ShouldContainSubstring, "hex string has length 0")
 		})
 
 		Convey("Invalid Address", func() {
-			_, err := rpc.GetBalance("InvalidAddress")
+			_, err := rpc.GetBalance("user","JgMchk9GTtGPqVYdTG2bpHMJ", "InvalidAddress")
 			So(err.Error(), ShouldContainSubstring, "cannot unmarshal hex string without 0x prefix ")
 		})
 	}))
