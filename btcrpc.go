@@ -8,26 +8,27 @@ import (
 
 // BtcRPCer ...
 type BtcRPCer interface {
-  GetBalance(address, block string) (balance string, err error)
-	GetTransactionCount(address, block string) (count uint64, err error)
+	GetBalance(address, block string) (balance string, err error)
+	GetTransactionCount(address string) (count uint64, err error)
 	SendRawTransaction(txData string) (txHash string, err error)
 	UseAppEngineContext(ctx context.Context)
 }
 
 // BtcRPC ...
 type BtcRPC struct {
-  rpcClient *jsonrpc.RPCClient
+	rpcClient *jsonrpc.RPCClient
 }
 
-// NewBtcRPC ...
+// NewEthRPC ...
 func NewBtcRPC(endpoint string) *BtcRPC {
 	return &BtcRPC{
 		rpcClient: jsonrpc.NewRPCClient(endpoint),
 	}
 }
 
-func (rpc *BtcRPC) GetBalance(address string) (balance string, err error) {
-	response, err := rpc.rpcClient.Call("getbalance", address)
+func (rpc *BtcRPC) GetBalance(username, password, account string) (balance float32, err error) {
+	rpc.rpcClient.SetBasicAuth(username, password)
+	response, err := rpc.rpcClient.Call("getbalance", account)
 	if err != nil {
 		return
 	}
@@ -36,7 +37,6 @@ func (rpc *BtcRPC) GetBalance(address string) (balance string, err error) {
 		err = response.Error
 		return
 	}
-
 	response.GetObject(&balance)
 	return
 }
