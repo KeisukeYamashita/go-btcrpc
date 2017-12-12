@@ -16,7 +16,7 @@ func TestMain(m *testing.M) {
 
 func WithBtcRPC(f func(rpc *BtcRPC)) func() {
 	return func() {
-		f(NewBtcRPC(os.Getenv("BTCD_ENDPOINT")))
+		f(NewBtcRPC(os.Getenv("BTCD_ENDPOINT"), os.Getenv("USERNAME"), os.Getenv("PASSWORD")))
 	}
 }
 
@@ -24,9 +24,14 @@ func WithBtcRPC(f func(rpc *BtcRPC)) func() {
 func TestGetBalance(t *testing.T) {
 	Convey("WithBtcRPC", t, WithBtcRPC(func(rpc *BtcRPC) {
 		Convey("Success", func() {
-			balance, err := rpc.GetBalance("","", "hogehoge")
+			balance, err := rpc.GetBalance("hogehoge")
 			So(err, ShouldBeNil)
 			So(balance, ShouldEqual, 0.00000)
+		})
+
+		Convey("Invalid Basic Auth", func() {
+			_, err := rpc.GetBalance("hogehoge")
+			So(err, ShouldContainString, "Invalid Basic Auth")
 		})
 	}))
 }

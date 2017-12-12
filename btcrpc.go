@@ -2,32 +2,29 @@ package btcrpc
 
 import (
 	"context"
-	"github.com/GuiltyMorishita/jsonrpc"
+	"github.com/KeisukeYamashita/jsonrpc"
 	"google.golang.org/appengine/urlfetch"
 )
 
-// BtcRPCer ...
-type BtcRPCer interface {
-	GetBalance(address, block string) (balance string, err error)
-	GetTransactionCount(address string) (count uint64, err error)
-	SendRawTransaction(txData string) (txHash string, err error)
-	UseAppEngineContext(ctx context.Context)
-}
-
-// BtcRPC ...
+// BtcRPC sends JSON-RPC1.0 request over http to the provided rpc endpoint.
+// BtcRPC is created using the factory function NewBtcRPC().
 type BtcRPC struct {
 	rpcClient *jsonrpc.RPCClient
 }
 
-// NewEthRPC ...
-func NewBtcRPC(endpoint string) *BtcRPC {
+// NewBtcRPC returns a new RPCClient instance with endpoint and basic authentication.
+// One you conduct this function you can send HTTP request with basic authentication anytimes.
+func NewBtcRPC(endpoint, username, password string) *BtcRPC {
+	basicAuth = &jsonrpc.BasicAuth{
+		username: username,
+		password: password,
+	}
 	return &BtcRPC{
-		rpcClient: jsonrpc.NewRPCClient(endpoint),
+		rpcClient: jsonrpc.NewRPCClient(endpoint, basicAuth),
 	}
 }
 
-func (rpc *BtcRPC) GetBalance(username, password, account string) (balance float32, err error) {
-	rpc.rpcClient.SetBasicAuth(username, password)
+func (rpc *BtcRPC) GetBalance(account string) (balance float32, err error) {
 	response, err := rpc.rpcClient.Call("getbalance", account)
 	if err != nil {
 		return
