@@ -13,6 +13,23 @@ Use go get to install and update.
 go get github.com/BlockChainUtils/go-btcrpc.git
 ```
 
+## Setup
+You need to setup enviromental variables.
+
+Firstly, copy the `.test.env.sample` as `.test.env`
+
+```
+cp test.env.sample .test.env
+```
+
+Setup in your `.test.env`.
+
+```
+BTCD_ENDPOINT: NODE_ENDPOINT
+USERNAME: USERNAME_FOR_BASICAUTH
+PASSWORD: PASSWORD_FOR_BASICAUTH
+```
+
 ## Usage and Example
 This shows you that easiest request to the node which is getting the infos.
 
@@ -25,12 +42,12 @@ import (
   )
 
 func main(){
-  info, err = rpc.GetInfo(username, password)
+  info, err := rpc.GetInfo(username, password)
   fmt.Print(info)
 }
 ```
 
-### curl command
+### Equal curl command
 This is equal to this curl command from your terminal.
 
 ```
@@ -38,7 +55,6 @@ curl -X "POST" "<YOUR_BITCOIN_NODE>" \
      -H 'Content-Type: application/json; charset=utf-8' \
      -u '<YOUR_USER_NAME>:<YOUR_PASSWORD>' \
      -d $'{
-  "jsonrpc": "1.0",
   "method": "getinfo",
   "id": "1",
   "params": []
@@ -48,10 +64,8 @@ curl -X "POST" "<YOUR_BITCOIN_NODE>" \
 It'll return a JSON.
 
 ### Available Methods
+
 ```
-- "getbalance"          get the balance of your node.
-- "getbalance"          get the balance of your node.
-- "getbalance"          get the balance of your node.
 - "getbalance"          get the balance of your node.
 ```
 
@@ -76,4 +90,5 @@ We are also providing a similar library with Ethereum.
 Look at this [repository](https://github.com/BlockChainUtils/go-ethrpc).
 
 ## License
-MIT
+Copyright ©2017 KeisukeYamashita All right reserved.
+MIT License 
