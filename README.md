@@ -91,4 +91,5 @@ Look at this [repository](https://github.com/BlockChainUtils/go-ethrpc).
 
 ## License
 Copyright 2017 Keisuke Yamashita.
+
 Licensed under the MIT License.
