@@ -29,8 +29,6 @@ func (rpc *BtcRPC) GetBalance(account string) (balance float32, err error) {
 	if err != nil {
 		return
 	}
-	pp.Println(response==nil)
-	pp.Println(response.Error==nil)
 
 	if response.Error != nil {
 		err = response.Error
