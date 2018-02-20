@@ -75,10 +75,10 @@ It'll return a JSON.
 ```
 
 ## Use tests
-Set up your enviromental valiables in `.test.env` to conduct this test.
+Set up your enviromental valiables in `.env` to conduct this test.
 
 ```
-cp .test.env.sample .test.env
+cp .env.sample .env
 ```
 
 Then write in your endpoint in this file.
