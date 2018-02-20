@@ -1,0 +1,38 @@
+version: 2.0
+
+reference:
+  vendoring: &vendoring
+    run:
+      name: Vendoring
+      command: |
+        if [ ! -e ${VENDOR_PATH} ]; then
+          go get -u -v github.com/golang/dep/cmd/dep
+          dep ensure -v
+        fi
+  
+jobs:
+  build:
+    working_directory: /go/src/github.com/KeisukeYamashita/go-btcrpc
+    docker:
+      - image: circleci/golang:1.9 
+    steps:
+      - checkout
+      - run:
+        <<: *vendoring
+
+    test:
+      run:
+        name: Run test
+        command: |
+          go get github.com/golang/lint/golint
+          golint $(go list ./... | grep -v vendor)
+          go vet $(go list ./... | grep -v vendor)
+          GO_ENV=test go test -race $(go list ./... | grep -v vendor)
+
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
+      - test
