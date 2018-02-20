@@ -1,0 +1,22 @@
+version: 2.0
+  
+jobs:
+  build:
+    working_directory: /go/src/github.com/KeisukeYamashita/go-btcrpc
+    docker:
+      - image: circleci/golang:1.9 
+    steps:
+      - checkout
+      - run:
+          name: Run test
+          command: |
+            go get github.com/golang/lint/golint
+            golint $(go list ./... | grep -v vendor)
+            go vet $(go list ./... | grep -v vendor)
+            GO_ENV=test go test -race $(go list ./... | grep -v vendor)
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
