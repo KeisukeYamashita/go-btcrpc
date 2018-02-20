@@ -4,7 +4,7 @@
 
 go-btcrpc is a Go library use for interacting to the bitcoin node from your server with JSON-RPC which is a standard protocol for blockchain.
 
-This library provides the easiest way to send JSON-RPC, which is not a major standard for
+This library provides the easiest way to send JSON-RPC.
 
 ## Installation
 Use go get to install and update.
