@@ -1,6 +1,15 @@
 version: 2.0
 
 reference:
+  work_dir: &work_dir /go/src/github.com/KeisukeYamashita/go-btcrpc
+  vendor_path: &vendor_path /go/src/github.com/KeisukeYamashita/go-btcrpc/vendor
+  golang_container_config: &golang_container_config
+    docker:
+    - image: circleci/golang:1.9
+      environment:
+        VENDOR_PATH: *vendor_path
+    working_directory: *work_dir
+
   vendoring: &vendoring
     run:
       name: Vendoring
@@ -11,28 +20,20 @@ reference:
         fi
   
 jobs:
-  build:
-    working_directory: /go/src/github.com/KeisukeYamashita/go-btcrpc
-    docker:
-      - image: circleci/golang:1.9 
+  test:
+    <<: *golang_container_config
     steps:
       - checkout
+      - *vendoring
       - run:
-        <<: *vendoring
-
-    test:
-      run:
-        name: Run test
-        command: |
-          go get github.com/golang/lint/golint
-          golint $(go list ./... | grep -v vendor)
-          go vet $(go list ./... | grep -v vendor)
-          GO_ENV=test go test -race $(go list ./... | grep -v vendor)
-
-
+          name: Run Test
+          command: |
+            go get github.com/golang/lint/golint
+            golint $(go list ./... | grep -v vendor)
+            go vet $(go list ./... | grep -v vendor)
+            GO_ENV=test go test -race $(go list ./... | grep -v vendor)
 workflows:
   version: 2
-  build:
+  test:
     jobs:
-      - build
       - test
