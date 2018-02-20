@@ -62,10 +62,10 @@ func TestTransactionStruct(t *testing.T) {
 		var VinCoinbaseTranscactionNum int
 		var VinTransactionNum int
 		for i, Vin := range rawTx.Vins {
-			if _, ok := Vin.(VinTransaction); ok == true {
+			if _, ok := Vin.(VinTransaction); ok {
 				VinTransactionNum = i
 			}
-			if _, ok := Vin.(VinCoinbaseTransaction); ok == true {
+			if _, ok := Vin.(VinCoinbaseTransaction); ok {
 				VinCoinbaseTranscactionNum = i
 			}
 		}
