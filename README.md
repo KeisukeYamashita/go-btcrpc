@@ -16,13 +16,13 @@ go get github.com/BlockChainUtils/go-btcrpc.git
 ## Setup
 You need to setup enviromental variables.
 
-Firstly, copy the `.test.env.sample` as `.test.env`
+Firstly, copy the `.env.sample` as `.env`
 
 ```
-cp test.env.sample .test.env
+cp .env.sample .env
 ```
 
-Setup in your `.test.env`.
+Setup in your `.env`.
 
 ```
 BTCD_ENDPOINT: NODE_ENDPOINT
@@ -38,7 +38,7 @@ package main
 
 import (
   "fmt"
-  "github.com/BlockChainUtils/go-btcrpc"
+  "github.com/KeisukeYamashita/go-btcrpc"
   )
 
 func main(){
@@ -65,7 +65,12 @@ It'll return a JSON.
 ### Available Methods
 
 ```
-- "getbalance"          get the balance of your node.
+- "getbalance"          get the balance of your account.
+- "getblockHash"          get the hash of the block.
+- "getblock"          get the block by hash of the block.
+- "getblockCount"          get the newest block count by hash of the block.
+- "decodeTransaction"          decode the raw transaction to humanreadable transaction by hash of the block.
+- "getrawTransaction"          get the raw transaction hash block count by hash of the block.
 ```
 
 ## Use tests
@@ -81,14 +86,13 @@ Then write in your endpoint in this file.
 Finally run your test. It will pass if your bitcoin node is setted up correctly.
 
 ```
-go test bitrpc
+go test btcrpc
 ```
 
-## For whose also intersted in Ethereum
-We are also providing a similar library with Ethereum.
-Look at this [repository](https://github.com/BlockChainUtils/go-ethrpc).
+## Contribution
+To contribute, just send me a pull request!
+If it is valid, you will be on the contribution doc.
 
 ## License
 Copyright 2017 Keisuke Yamashita.
-
 Licensed under the MIT License.
