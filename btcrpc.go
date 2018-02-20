@@ -31,9 +31,25 @@ func NewRPCClient(endpoint string, basicAuth *BasicAuth) *RPCClient {
 	return c
 }
 
+// GetNewAddress ...
+func (c *RPCClient) GetNewAddress(account string) (string, error) {
+	resp, err := c.RPCClient.Call("getnewaddress", []string{account})
+	if err != nil {
+		return "", err
+	}
+
+	if resp.Error != nil {
+		return "", errors.New(resp.Error.Message)
+	}
+
+	var address float32
+	resp.GetObject(&address)
+	return address, nil
+}
+
 // GetBalance ...
 func (c *RPCClient) GetBalance(address string) (float32, error) {
-	resp, err := c.RPCClient.Call("getblockhash", []string{address})
+	resp, err := c.RPCClient.Call("getbalance", []string{address})
 	if err != nil {
 		return "", err
 	}

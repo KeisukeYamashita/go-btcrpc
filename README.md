@@ -65,10 +65,11 @@ It'll return a JSON.
 ### Available Methods
 
 ```
-- "getbalance"          get the balance of your account.
-- "getblockHash"          get the hash of the block.
-- "getblock"          get the block by hash of the block.
-- "getblockCount"          get the newest block count by hash of the block.
+- "getNewAddress"          creates a new address to your account.
+- "getBalance"          get the balance of your address.
+- "getBlockHash"          get the hash of the block.
+- "getBlock"          get the block by hash of the block.
+- "getBlockCount"          get the newest block count by hash of the block.
 - "decodeTransaction"          decode the raw transaction to humanreadable transaction by hash of the block.
 - "getrawTransaction"          get the raw transaction hash block count by hash of the block.
 ```

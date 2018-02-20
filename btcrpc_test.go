@@ -37,6 +37,18 @@ func TestRPCClient(t *testing.T) {
 	})
 }
 
+func TestNewAddress(t *testing.T) {
+	basicAuth := &BasicAuth{
+		Username: os.Getenv("USERNAME"),
+		Password: os.Getenv("PASSWORD"),
+	}
+	c := NewRPCClient(os.Getenv("BTCD_ENDPOINT"), basicAuth)
+	Convey("Success", t, func() {
+		result, err := c.GetNewAddress("KeisukeYamashita")
+		So(err, ShouldBeNil)
+	})
+}
+
 func TestGetBalance(t *testing.T) {
 	basicAuth := &BasicAuth{
 		Username: os.Getenv("USERNAME"),
