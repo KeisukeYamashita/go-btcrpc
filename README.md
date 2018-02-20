@@ -14,7 +14,7 @@ go get github.com/BlockChainUtils/go-btcrpc.git
 ```
 
 ## Setup
-You need to setup enviromental variables.
+You need to setup environmental variables.
 
 Firstly, copy the `.env.sample` as `.env`
 
@@ -83,7 +83,7 @@ It'll return a JSON.
 ```
 
 ## Use tests
-Set up your enviromental valiables in `.env` to conduct this test.
+Set up your environmental valiables in `.env` to conduct this test.
 
 ```
 cp .env.sample .env
