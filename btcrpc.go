@@ -33,7 +33,7 @@ func NewRPCClient(endpoint string, basicAuth *BasicAuth) *RPCClient {
 
 // GetNewAddress ...
 func (c *RPCClient) GetNewAddress(account string) (string, error) {
-	resp, err := c.RPCClient.Call("getnewaddress", []string{account})
+	resp, err := c.RPCClient.Call("getnewaddress", account)
 	if err != nil {
 		return "", err
 	}
@@ -42,20 +42,20 @@ func (c *RPCClient) GetNewAddress(account string) (string, error) {
 		return "", errors.New(resp.Error.Message)
 	}
 
-	var address float32
+	var address string
 	resp.GetObject(&address)
 	return address, nil
 }
 
 // GetBalance ...
 func (c *RPCClient) GetBalance(address string) (float32, error) {
-	resp, err := c.RPCClient.Call("getbalance", []string{address})
+	resp, err := c.RPCClient.Call("getbalance", address)
 	if err != nil {
-		return "", err
+		return -1, err
 	}
 
 	if resp.Error != nil {
-		return "", errors.New(resp.Error.Message)
+		return -1, errors.New(resp.Error.Message)
 	}
 
 	var balance float32
@@ -65,7 +65,7 @@ func (c *RPCClient) GetBalance(address string) (float32, error) {
 
 // GetBlockHash ...
 func (c *RPCClient) GetBlockHash(height int32) (string, error) {
-	resp, err := c.RPCClient.Call("getblockhash", []int32{height})
+	resp, err := c.RPCClient.Call("getblockhash", height)
 	if err != nil {
 		return "", err
 	}
@@ -81,7 +81,7 @@ func (c *RPCClient) GetBlockHash(height int32) (string, error) {
 
 // GetBlock ...
 func (c *RPCClient) GetBlock(h string) (*Block, error) {
-	resp, err := c.RPCClient.Call("getblock", []string{h})
+	resp, err := c.RPCClient.Call("getblock", h)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ func (c *RPCClient) GetBlock(h string) (*Block, error) {
 
 // GetBlockCount ...
 func (c *RPCClient) GetBlockCount() (int32, error) {
-	resp, err := c.RPCClient.Call("getblockcount", []interface{}{})
+	resp, err := c.RPCClient.Call("getblockcount")
 	if err != nil {
 		return -1, err
 	}
@@ -120,7 +120,7 @@ func (c *RPCClient) GetBlockCount() (int32, error) {
 func (c *RPCClient) GetRawTransactions(txids []string) ([]string, error) {
 	rawTxs := make([]string, len(txids))
 	for i, txid := range txids {
-		resp, err := c.RPCClient.Call("getrawtransaction", []string{txid})
+		resp, err := c.RPCClient.Call("getrawtransaction", txid)
 		if err != nil {
 			return nil, err
 		}
@@ -140,7 +140,7 @@ func (c *RPCClient) GetRawTransactions(txids []string) ([]string, error) {
 func (c *RPCClient) DecodeRawTransactions(rawTxs []string) ([]*Transaction, error) {
 	txs := make([]*Transaction, len(rawTxs))
 	for i, rawTx := range rawTxs {
-		resp, err := c.RPCClient.Call("decoderawtransaction", []string{rawTx})
+		resp, err := c.RPCClient.Call("decoderawtransaction", rawTx)
 		if err != nil {
 			return nil, err
 		}
