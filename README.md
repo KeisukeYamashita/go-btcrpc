@@ -41,15 +41,15 @@ import (
   btcrpc "github.com/KeisukeYamashita/go-btcrpc"
   )
 
-func main(){
-  basicAuth := &BasicAuth{
-			Username: os.Getenv("USERNAME"),
-			Password: os.Getenv("PASSWORD"),
+func main() {
+	basicAuth := &BasicAuth{
+		Username: os.Getenv("USERNAME"),
+		Password: os.Getenv("PASSWORD"),
 	}
 	c := NewRPCClient(os.Getenv("BTCD_ENDPOINT"), basicAuth)
-  address := "my88QLpf2RYYDdNMmDwYvfx6TFc6NXaELa"
-  balance := c.GetBalance(address)
-  fmt.Print(balance) // 0.13514 BTC
+	address := "my88QLpf2RYYDdNMmDwYvfx6TFc6NXaELa"
+	balance := c.GetBalance(address)
+	fmt.Print(balance) // 0.13514 BTC
 }
 ```
 
