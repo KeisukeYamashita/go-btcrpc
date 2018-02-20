@@ -1,0 +1,16 @@
+inspecode:
+  experimental:
+    env:
+      GLIDE_INSTALL_STRIP_VENDOR: 1
+  # golang configuration.
+  gas: default
+  go-test: default
+  errcheck: default
+  go-vet: default
+  gofmt: auto-fix
+  goimports: auto-fix
+  golint: auto-fix
+  gosimple: default
+  ineffassign: default
+  interfacer: default
+  misspell: auto-fix
