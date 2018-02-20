@@ -33,17 +33,23 @@ PASSWORD: PASSWORD_FOR_BASICAUTH
 ## Usage and Example
 This shows you that easiest request to the node which is getting the infos.
 
-```
+```go
 package main
 
 import (
   "fmt"
-  "github.com/KeisukeYamashita/go-btcrpc"
+  btcrpc "github.com/KeisukeYamashita/go-btcrpc"
   )
 
 func main(){
-  info, err := rpc.GetInfo(username, password)
-  fmt.Print(info)
+  basicAuth := &BasicAuth{
+			Username: os.Getenv("USERNAME"),
+			Password: os.Getenv("PASSWORD"),
+	}
+	c := NewRPCClient(os.Getenv("BTCD_ENDPOINT"), basicAuth)
+  address := "my88QLpf2RYYDdNMmDwYvfx6TFc6NXaELa"
+  balance := c.GetBalance(address)
+  fmt.Print(balance) // 0.13514 BTC
 }
 ```
 
@@ -54,9 +60,11 @@ curl -X "POST" "<YOUR_BITCOIN_NODE>" \
      -H 'Content-Type: application/json; charset=utf-8' \
      -u '<YOUR_USER_NAME>:<YOUR_PASSWORD>' \
      -d $'{
-  "method": "getinfo",
+  "method": "getbalance",
   "id": "1",
-  "params": []
+  "params": [
+    "my88QLpf2RYYDdNMmDwYvfx6TFc6NXaELa"
+  ]
 }'
 ```
 
