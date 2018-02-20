@@ -28,10 +28,10 @@ jobs:
       - run:
           name: Run Test
           command: |
-            cp .env.sample .env
             go get github.com/golang/lint/golint
             golint $(go list ./... | grep -v vendor)
             go vet $(go list ./... | grep -v vendor)
+            cp .env.sample .env
             GO_ENV=test go test -race $(go list ./... | grep -v vendor)
 workflows:
   version: 2
