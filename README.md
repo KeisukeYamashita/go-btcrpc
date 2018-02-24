@@ -1,6 +1,8 @@
 # go-btcrpc
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
+[![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg)](https://godoc.org/github.com/KeisukeYamashita/go-btcrpc)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![CircleCI](https://circleci.com/gh/KeisukeYamashita/go-btcrpc.svg?style=svg)](https://circleci.com/gh/KeisukeYamashita/go-btcrpc)
 [![Job Status](https://inspecode.rocro.com/badges/github.com/KeisukeYamashita/go-btcrpc/status?token=SGqr7pQjbMTQuMDLOPk_rvq_hGeF_hoLj_B7tbRKSXg)](https://inspecode.rocro.com/jobs/github.com/KeisukeYamashita/go-btcrpc/latest?completed=true)
 [![Report](https://inspecode.rocro.com/badges/github.com/KeisukeYamashita/go-btcrpc/report?token=SGqr7pQjbMTQuMDLOPk_rvq_hGeF_hoLj_B7tbRKSXg&branch=master)](https://inspecode.rocro.com/reports/github.com/KeisukeYamashita/go-btcrpc/branch/master/summary)

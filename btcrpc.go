@@ -1,3 +1,8 @@
+/*
+Package btcrpc implements RPC methods to interact with the bitcoin node bitcoind.
+See informations in the pages link below about Bitcoin development.
+https://bitcoin.org/en/development
+*/
 package btcrpc
 
 import (
@@ -7,26 +12,32 @@ import (
 	"github.com/KeisukeYamashita/jsonrpc"
 )
 
-// BasicAuth ...
-// Bitcoin Node supports basic auth.
-// Some nodes do not need this. In that case, leave these blank.
+/*
+BasicAuth is for Bitcoin Node supports basic auth.
+Some nodes do not need this. In that case, leave these blank.
+*/
 type BasicAuth struct {
 	Username string
 	Password string
 }
 
-// RPCClient ...
+/*
+RPCClient ...
+*/
 type RPCClient struct {
 	*jsonrpc.RPCClient
 }
 
-// RPCer ...
+/*
+RPCer ...
+*/
 type RPCer interface {
 	GetBlockHash(height int32) (string, error)
 }
 
-// NewRPCClient ...
-// Creates JSONRPC clients for your bitcoin node.
+/*
+NewRPCClient creates JSONRPC clients for your bitcoin node.
+*/
 func NewRPCClient(endpoint string, basicAuth *BasicAuth) *RPCClient {
 	c := new(RPCClient)
 	c.RPCClient = jsonrpc.NewRPCClient(endpoint)
@@ -34,9 +45,10 @@ func NewRPCClient(endpoint string, basicAuth *BasicAuth) *RPCClient {
 	return c
 }
 
-// GetNewAddress ...
-// Gets new address associated with the account name given.
-// If the account name is blank(nil), if will also returns a addresss with no associated account.
+/*
+GetNewAddress gets new address associated with the account name given.
+If the account name is blank(nil), if will also returns a addresss with no associated account.
+*/
 func (c *RPCClient) GetNewAddress(account string) (string, error) {
 	resp, err := c.RPCClient.Call("getnewaddress", account)
 	if err != nil {
@@ -52,9 +64,10 @@ func (c *RPCClient) GetNewAddress(account string) (string, error) {
 	return address, nil
 }
 
-// GetBalance ...
-// Gets the balance of the address.
-// It is only possible to get the balance which is made by this node, otherwise it will return 0.00.
+/*
+GetBalance gets the balance of the address.
+It is only possible to get the balance which is made by this node, otherwise it will return 0.00.
+*/
 func (c *RPCClient) GetBalance(address string) (float32, error) {
 	resp, err := c.RPCClient.Call("getbalance", address)
 	if err != nil {
@@ -70,8 +83,9 @@ func (c *RPCClient) GetBalance(address string) (float32, error) {
 	return balance, nil
 }
 
-// GetBlockHash ...
-// Get the block hash(id) associated with the block height.
+/*
+GetBlockHash gets the block hash(id) associated with the block height.
+*/
 func (c *RPCClient) GetBlockHash(height int32) (string, error) {
 	resp, err := c.RPCClient.Call("getblockhash", height)
 	if err != nil {
@@ -87,9 +101,10 @@ func (c *RPCClient) GetBlockHash(height int32) (string, error) {
 	return hash, nil
 }
 
-// GetBlock ...
-// Get the block information associated with the block hash(id).
-// It contains a lot of infos about transactions.
+/*
+GetBlock gets the block information associated with the block hash(id).
+It contains a lot of infos about transactions.
+*/
 func (c *RPCClient) GetBlock(h string) (*Block, error) {
 	resp, err := c.RPCClient.Call("getblock", h)
 	if err != nil {
@@ -110,9 +125,10 @@ func (c *RPCClient) GetBlock(h string) (*Block, error) {
 	return &block, nil
 }
 
-// GetBlockCount ...
-// Gets the latest block height.
-// Note that The methods name is "Count" not "Height".
+/*
+GetBlockCount gets the latest block height.
+Note that The methods name is "Count" not "Height".
+*/
 func (c *RPCClient) GetBlockCount() (int32, error) {
 	resp, err := c.RPCClient.Call("getblockcount")
 	if err != nil {
@@ -128,8 +144,9 @@ func (c *RPCClient) GetBlockCount() (int32, error) {
 	return count, nil
 }
 
-// GetRawTransactions ...
-// Gets the raw transactions associated with the transaction hashes(ids).
+/*
+GetRawTransactions gets the raw transactions associated with the transaction hashes(ids).
+*/
 func (c *RPCClient) GetRawTransactions(txids []string) ([]string, error) {
 	rawTxs := make([]string, len(txids))
 	for i, txid := range txids {
@@ -149,8 +166,9 @@ func (c *RPCClient) GetRawTransactions(txids []string) ([]string, error) {
 	return rawTxs, nil
 }
 
-// DecodeRawTransactions ...
-// Decodes the raw transactions to human readable transactions.
+/*
+DecodeRawTransactions decodes the raw transactions to human readable transactions.
+*/
 func (c *RPCClient) DecodeRawTransactions(rawTxs []string) ([]*Transaction, error) {
 	txs := make([]*Transaction, len(rawTxs))
 	for i, rawTx := range rawTxs {
