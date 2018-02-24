@@ -53,6 +53,7 @@ type ScriptPubKey struct {
 }
 
 // VinTransaction ...
+// Vin(inputs) with normal transaction.
 type VinTransaction struct {
 	Txid        string `json:"txid"`
 	Vout        int32  `json:"vout"`
@@ -62,6 +63,7 @@ type VinTransaction struct {
 }
 
 // VinCoinbaseTransaction ...
+// Vins(inputs) with mining.
 type VinCoinbaseTransaction struct {
 	Coinbase string `json:"coinbase"`
 	Sequence int64  `json:"sequence"`
