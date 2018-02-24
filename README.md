@@ -72,15 +72,16 @@ It'll return a JSON.
 
 ### Available Methods
 
-```
-- "getNewAddress"          creates a new address to your account.
-- "getBalance"          get the balance of your address.
-- "getBlockHash"          get the hash of the block.
-- "getBlock"          get the block by hash of the block.
-- "getBlockCount"          get the newest block count by hash of the block.
-- "decodeTransaction"          decode the raw transaction to humanreadable transaction by hash of the block.
-- "getrawTransaction"          get the raw transaction hash block count by hash of the block.
-```
+| method| discription |
+|:----:|:----:|
+| getNewAddress | creates a new address to your account. |
+| getBalance | get the balance of your address. |
+| getBlockHash | get the hash of the block. |
+| getBlock | get the block by hash of the block. |
+| getBlockCount | get the newest block count by hash of the block. |
+| decodeTransaction | decode the raw transaction to humanreadable transaction by hash of the block. |
+| getrawTransaction | get the raw transaction hash block count by hash of the block. |
+
 
 ## Use tests
 Set up your environmental valiables in `.env` to conduct this test.
@@ -95,12 +96,12 @@ Then write in your endpoint in this file.
 Finally run your test. It will pass if your bitcoin node is setted up correctly.
 
 ```
-go test btcrpc
+GO_ENV = test go test btcrpc
 ```
 
 ## Contribution
 To contribute, just send me a pull request!
-If it is valid, you will be on the contribution doc.
+If it is valid, you will be added on the contribution doc in `/doc/contributor.md` .
 
 ## License
 Copyright 2017 Keisuke Yamashita.
