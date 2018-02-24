@@ -10,7 +10,7 @@ This library provides the easiest way to send JSON-RPC.
 Use go get to install and update.
 
 ```
-go get github.com/BlockChainUtils/go-btcrpc.git
+go get github.com/KeisukeYamashita/go-btcrpc.git
 ```
 
 ## Setup
