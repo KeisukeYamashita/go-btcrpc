@@ -113,4 +113,5 @@ If it is valid, you will be added on the contribution doc in `/doc/contributor.m
 
 ## License
 Copyright 2017 Keisuke Yamashita.
-Licensed under the MIT License.
+
+Licensed under the Apache 2.0 license.
