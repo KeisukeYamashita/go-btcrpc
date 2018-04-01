@@ -9,7 +9,7 @@ import (
 	"encoding/json"
 	"errors"
 
-	"github.com/KeisukeYamashita/jsonrpc"
+	jsonrpc "github.com/KeisukeYamashita/go-jsonrpc"
 )
 
 /*

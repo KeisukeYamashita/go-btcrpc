@@ -28,3 +28,7 @@
 [prune]
   go-tests = true
   unused-packages = true
+
+[[constraint]]
+  name = "github.com/KeisukeYamashita/go-jsonrpc"
+  version = "1.0.1"
